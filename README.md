@@ -24,5 +24,3 @@ This project aims to build regression models based on various features.
 - seaborn
 - scikit-learn
 
-## License
-This project is licensed under the MIT License.
