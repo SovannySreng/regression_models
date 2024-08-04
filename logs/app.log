@@ -1,0 +1,21 @@
+import logging
+import os
+
+def setup_logging():
+    log_directory = "logs"
+    if not os.path.exists(log_directory):
+        os.makedirs(log_directory)
+    
+    logging.basicConfig(filename=os.path.join(log_directory, 'app.log'), 
+                        level=logging.INFO,
+                        format='%(asctime)s:%(levelname)s:%(message)s')
+
+def log_error(e):
+    logging.error(f"Error: {e}")2024-08-04 09:27:37,617:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:28:35,521:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:30:01,246:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:33:10,312:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:34:03,175:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:35:29,852:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:36:12,562:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-04 09:38:18,499:ERROR:Error: "['target'] not found in axis"
