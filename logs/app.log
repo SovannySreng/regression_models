@@ -19,3 +19,7 @@ def log_error(e):
 2024-08-04 09:35:29,852:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
 2024-08-04 09:36:12,562:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
 2024-08-04 09:38:18,499:ERROR:Error: "['target'] not found in axis"
+2024-08-04 10:29:02,186:ERROR:Error: "['target'] not found in axis"
+2024-08-05 10:58:29,631:ERROR:Error: "['target'] not found in axis"
+2024-08-05 11:06:38,810:ERROR:Error: [Errno 2] No such file or directory: 'H:\\My Drive\\BISI II\\Data Science\\Term Assignments\\Regression_Models_Solution\\data\x0cinal.csv'
+2024-08-05 11:08:17,730:ERROR:Error: "['target'] not found in axis"

@@ -1,10 +1,15 @@
-import pandas as pd
+    
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def eda(df: pd.DataFrame):
-    print(df.head())
-    print(df.info())
-    print(df.describe())
-    sns.pairplot(df)
+def plot_distributions(df, column):
+    sns.histplot(df[column])
+    plt.show()
+
+def plot_tree(dtmodel, feature_names, file_name='tree.png'):
+    from sklearn import tree
+    plt.figure(figsize=(20, 10))
+    tree.plot_tree(dtmodel, feature_names=feature_names, filled=True)
+    plt.savefig(file_name, dpi=300)
     plt.show()

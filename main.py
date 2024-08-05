@@ -1,47 +1,44 @@
-from src.data_preprocessing import load_data, preprocess_data
-from src.eda import eda
-from src.feature_engineering import feature_engineering
-from src.model_training import train_model
+
+import pandas as pd
+from src.data_preprocessing import load_data, split_data
+from src.eda import plot_distributions, plot_tree
 from src.evaluation import evaluate_model
-from src.visualization import plot_histograms, plot_categorical_distribution
-from src.utils import setup_logging, log_error
-from sklearn.model_selection import train_test_split
+from src.model_training import train_linear_regression, train_decision_tree, train_random_forest, save_model, load_model
 
 def main():
-    setup_logging()
-    
-    try:
-        df = load_data('data/final.csv')  
-        # Perform EDA
-        eda(df)
-        
-        # Preprocess Data
-        df = preprocess_data(df)
-        
-        # Feature Engineering
-        df = feature_engineering(df)
-        
-        # Visualizations
-        num_cols = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
-        cat_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
-        
-        plot_histograms(df, num_cols)
-        plot_categorical_distribution(df, cat_cols)
-        
-        # Split the data
-        X = df.drop('target', axis=1)
-        y = df['target']
-        x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-        
-        # Train the model
-        model = train_model(x_train, y_train)
-        
-        # Evaluate the model
-        evaluate_model(model, x_test, y_test)
-        
-    except Exception as e:
-        log_error(e)
-        print(f"An error occurred: {e}")
+    # Load data
+    df = load_data('H:/My Drive/BISI II/Data Science/Term Assignments/Regression_Models_Solution/data/final.csv')
 
-if __name__ == "__main__":
+    # EDA
+    #plot_distributions(df, 'LoanAmount')
+
+    # Split data
+    x_train, x_test, y_train, y_test = split_data(df, 'price')
+
+    # Train models
+    lr_model = train_linear_regression(x_train, y_train)
+    dt_model = train_decision_tree(x_train, y_train)
+    rf_model = train_random_forest(x_train, y_train)
+
+    # Evaluate models
+    lr_train_mae, lr_test_mae = evaluate_model(lr_model, x_train, y_train, x_test, y_test)
+    dt_train_mae, dt_test_mae = evaluate_model(dt_model, x_train, y_train, x_test, y_test)
+    rf_train_mae, rf_test_mae = evaluate_model(rf_model, x_train, y_train, x_test, y_test)
+
+    print(f'Linear Regression - Train MAE: {lr_train_mae}, Test MAE: {lr_test_mae}')
+    print(f'Decision Tree - Train MAE: {dt_train_mae}, Test MAE: {dt_test_mae}')
+    print(f'Random Forest - Train MAE: {rf_train_mae}, Test MAE: {rf_test_mae}')
+
+    # Plot decision tree
+    plot_tree(dt_model, dt_model.feature_names_in_)
+
+    # Save model
+    save_model(rf_model, 'RE_Model.pkl')
+
+    # Load model and make a prediction
+    loaded_model = load_model('RE_Model.pkl')
+    prediction = loaded_model.predict([[2012, 216, 74, 1, 1, 618, 2000, 600, 1, 0, 0, 6, 0]])
+    print(f'Prediction: {prediction}')
+
+if __name__ == '__main__':
     main()
